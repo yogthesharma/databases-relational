@@ -239,10 +239,12 @@ databases-relational/
 ├── docker/init/            # Schema + seed on first boot
 ├── notes/
 │   ├── 00-setup/
-│   └── 01-sql-fundamentals/
+│   ├── 01-sql-fundamentals/
+│   └── 02-joins-and-sets/
 ├── exercises/              # Same module/concept filenames as notes/
 │   ├── 00-setup/
-│   └── 01-sql-fundamentals/
+│   ├── 01-sql-fundamentals/
+│   └── 02-joins-and-sets/
 └── projects/               # Later — not started yet
 ```
 
@@ -252,8 +254,8 @@ databases-relational/
 
 ### Modules
 
-- [ ] 0 — Setup & mental model
-- [ ] 1 — SQL fundamentals
+- [x] 0 — Setup & mental model
+- [x] 1 — SQL fundamentals
 - [ ] 2 — Joins & set thinking
 - [ ] 3 — Writing data & integrity
 - [ ] 4 — Schema design & normalization
