@@ -11,7 +11,8 @@ Your API and UI talk about **resources** (users, orders, posts). Postgres stores
 | **Relation / table** | A named set of rows with a fixed set of columns |
 | **Row / tuple** | One record (one employee, one product) |
 | **Column / attribute** | A typed field (`salary NUMERIC`, `email TEXT`) |
-| **Schema** | Structure: tables, columns, types, constraints |
+| **Schema (design)** | Structure: tables, columns, types, constraints |
+| **Schema (Postgres)** | A namespace inside a DB (default: `public`) — later modules |
 | **Database** | A named container of schemas/tables (we use `learn`) |
 | **Primary key** | Uniquely identifies a row (`employees.id`) |
 | **Foreign key** | A column that points at another row’s key (`manager_id → employees.id`) |

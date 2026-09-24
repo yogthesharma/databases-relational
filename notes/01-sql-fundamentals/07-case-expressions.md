@@ -35,15 +35,16 @@ FROM employees;
 
 ## Inside aggregates
 
+Conditional counts without leaving SQL:
+
 ```sql
 SELECT
   count(*) AS total,
-  count(*) FILTER (WHERE is_active) AS active,  -- Postgres nicety (Module 8)
-  sum(CASE WHEN is_active THEN 1 ELSE 0 END) AS active_via_case
+  sum(CASE WHEN is_active THEN 1 ELSE 0 END) AS active_count
 FROM employees;
 ```
 
-(You’ll prefer `FILTER` later; `CASE` works everywhere.)
+(Postgres also has `count(*) FILTER (WHERE …)` — Module 8. Stick to `CASE` for now.)
 
 ## Node angle
 

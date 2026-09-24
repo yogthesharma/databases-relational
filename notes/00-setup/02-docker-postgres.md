@@ -25,10 +25,11 @@ docker compose ps
 Wait until healthy, then:
 
 ```bash
+docker compose exec postgres pg_isready -U postgres -d learn
 docker compose exec postgres psql -U postgres -d learn -c 'SELECT version();'
 ```
 
-You should see PostgreSQL 16.x and exit 0.
+You should see `accepting connections`, then PostgreSQL 16.x.
 
 ## Useful commands
 

@@ -33,26 +33,34 @@ SELECT email FROM employees WHERE email LIKE '%@example.com';
 SELECT name FROM products WHERE name ILIKE '%notebook%';  -- case-insensitive
 ```
 
-`LIKE` is case-sensitive in Postgres; `ILIKE` is not. Leading `%` prevents a plain B-tree index from helping (Module 7 / `pg_trgm` later).
+`LIKE` is case-sensitive in Postgres; `ILIKE` is not. **`ILIKE` is Postgres-specific** (standard SQL has `LIKE` only — other DBs differ). Leading `%` prevents a plain B-tree index from helping (Module 7 / `pg_trgm` later).
 
-## Combining
+## Combining — always parenthesize mixed AND/OR
+
+`AND` binds tighter than `OR`. Without parentheses, this is **wrong** for “Laptops/Displays in stock matching notebook *or* mouse”:
 
 ```sql
-SELECT sku, name, category, stock_qty
+-- BAD: parses as
+-- (category IN (...) AND stock_qty > 0 AND name ILIKE '%notebook%')
+-- OR name ILIKE '%mouse%'
+-- → Wireless Mouse (Peripherals) sneaks in!
+SELECT name, category
 FROM products
 WHERE category IN ('Laptops', 'Displays')
   AND stock_qty > 0
-  AND name ILIKE '%monitor%' OR name ILIKE '%notebook%';  -- careful with AND/OR precedence!
+  AND name ILIKE '%notebook%' OR name ILIKE '%mouse%';
 ```
 
-Use parentheses:
+Correct:
 
 ```sql
+SELECT name, category
+FROM products
 WHERE category IN ('Laptops', 'Displays')
   AND stock_qty > 0
-  AND (name ILIKE '%monitor%' OR name ILIKE '%notebook%')
+  AND (name ILIKE '%notebook%' OR name ILIKE '%mouse%');
 ```
 
 ## Takeaway
 
-`IN`, `BETWEEN`, `LIKE`/`ILIKE` cover most filters. Parenthesize mixed `AND`/`OR`. Prefer `ILIKE` for user search boxes unless you need case-sensitive match.
+`IN`, `BETWEEN`, `LIKE`/`ILIKE` cover most filters. Parenthesize mixed `AND`/`OR`. Prefer `ILIKE` for user search boxes in Postgres unless you need case-sensitive match.

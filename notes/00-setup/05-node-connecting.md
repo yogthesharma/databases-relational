@@ -25,19 +25,34 @@ npm install pg dotenv
 
 ## Minimal query (parameterized)
 
+Put `"type": "module"` in `package.json` (or use a `.mjs` file). Load env from this repo’s `.env`, or export `DATABASE_URL` in the shell.
+
 ```js
 import 'dotenv/config';
 import pg from 'pg';
 
-const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+async function main() {
+  const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
-const { rows } = await pool.query(
-  'SELECT id, first_name, department FROM employees WHERE department = $1',
-  ['Engineering']
-);
+  const { rows } = await pool.query(
+    'SELECT id, first_name, department FROM employees WHERE department = $1',
+    ['Engineering']
+  );
 
-console.log(rows);
-await pool.end();
+  console.log(rows);
+  await pool.end();
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
+```
+
+If the scratch folder is not the repo root, either copy `.env` there or run:
+
+```bash
+export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/learn
 ```
 
 **Always use `$1`, `$2`, … parameters** — never string-concatenate user input into SQL (SQL injection).

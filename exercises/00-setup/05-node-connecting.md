@@ -37,21 +37,28 @@ Use the same pool to run two queries in sequence: count of Engineering employees
 
 ## Solutions
 
-Example script (ESM — add `"type": "module"` in package.json):
+Example script (ESM — add `"type": "module"` in `package.json`). Export `DATABASE_URL` or copy the repo `.env` into the scratch folder:
 
 ```js
 import 'dotenv/config';
 import pg from 'pg';
 
-const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+async function main() {
+  const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
-const { rows } = await pool.query(
-  'SELECT id, first_name, department FROM employees WHERE is_active = $1',
-  [true]
-);
+  const { rows } = await pool.query(
+    'SELECT id, first_name, department FROM employees WHERE is_active = $1',
+    [true]
+  );
 
-console.log('rows:', rows.length);
-await pool.end();
+  console.log('rows:', rows.length);
+  await pool.end();
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
 ```
 
 5. Parameters keep user input out of the SQL string parser → prevents SQL injection.

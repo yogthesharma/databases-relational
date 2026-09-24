@@ -30,7 +30,7 @@ ORDER BY headcount DESC;
 
 Rules of thumb:
 
-- Every non-aggregated column in `SELECT` must appear in `GROUP BY`.
+- Every non-aggregated column in `SELECT` must appear in `GROUP BY` (required for portable SQL; follow this always in this course).
 - Filter **rows before grouping** with `WHERE`.
 - Filter **groups after aggregation** with `HAVING`.
 
@@ -41,9 +41,11 @@ SELECT category, count(*) AS n, avg(price) AS avg_price
 FROM products
 WHERE is_discontinued = FALSE
 GROUP BY category
-HAVING count(*) >= 2
+HAVING count(*) >= 3   -- drop small categories after grouping
 ORDER BY avg_price DESC;
 ```
+
+On our seed, that keeps categories with enough products (e.g. Peripherals) and drops thinner ones.
 
 ## COUNT pitfalls
 

@@ -11,6 +11,15 @@ SELECT
 FROM employees;
 ```
 
+## String concatenation
+
+Postgres uses `||` to join text:
+
+```sql
+SELECT first_name || ' ' || last_name AS full_name
+FROM employees;
+```
+
 Aliases shine in Node: shape JSON keys without renaming in JS.
 
 ```js

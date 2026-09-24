@@ -45,7 +45,7 @@ SELECT
   END AS level
 FROM employees;
 
--- 3
+-- 3 (repeat the CASE in GROUP BY — same expression as SELECT)
 SELECT
   CASE
     WHEN price = 0 THEN 'free'
@@ -55,7 +55,13 @@ SELECT
   END AS price_band,
   count(*) AS n
 FROM products
-GROUP BY 1
+GROUP BY
+  CASE
+    WHEN price = 0 THEN 'free'
+    WHEN price < 100 THEN 'budget'
+    WHEN price < 500 THEN 'mid'
+    ELSE 'premium'
+  END
 ORDER BY n DESC;
 
 -- Stretch
