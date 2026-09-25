@@ -25,6 +25,7 @@ A **schema** is a namespace inside a database (not the same as â€œschema designâ
 | `write_lab` | Module 3 write practice |
 | `design_lab` | Module 4 design practice |
 | `types_lab` | Module 5 types practice |
+| `tx_lab` | Module 6 transactions / concurrency |
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS app;

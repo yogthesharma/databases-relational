@@ -243,14 +243,16 @@ databases-relational/
 │   ├── 02-joins-and-sets/
 │   ├── 03-writing-and-integrity/
 │   ├── 04-schema-design/
-│   └── 05-postgres-types/
+│   ├── 05-postgres-types/
+│   └── 06-transactions-concurrency/
 ├── exercises/              # Same module/concept filenames as notes/
 │   ├── 00-setup/
 │   ├── 01-sql-fundamentals/
 │   ├── 02-joins-and-sets/
 │   ├── 03-writing-and-integrity/
 │   ├── 04-schema-design/
-│   └── 05-postgres-types/
+│   ├── 05-postgres-types/
+│   └── 06-transactions-concurrency/
 └── projects/               # Later — not started yet
 ```
 
@@ -265,7 +267,7 @@ databases-relational/
 - [x] 2 — Joins & set thinking
 - [x] 3 — Writing data & integrity
 - [x] 4 — Schema design & normalization
-- [ ] 5 — PostgreSQL types
+- [x] 5 — PostgreSQL types
 - [ ] 6 — Transactions & concurrency
 - [ ] 7 — Indexing & performance
 - [ ] 8 — Advanced SQL
