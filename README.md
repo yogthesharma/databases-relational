@@ -240,11 +240,13 @@ databases-relational/
 ├── notes/
 │   ├── 00-setup/
 │   ├── 01-sql-fundamentals/
-│   └── 02-joins-and-sets/
+│   ├── 02-joins-and-sets/
+│   └── 03-writing-and-integrity/
 ├── exercises/              # Same module/concept filenames as notes/
 │   ├── 00-setup/
 │   ├── 01-sql-fundamentals/
-│   └── 02-joins-and-sets/
+│   ├── 02-joins-and-sets/
+│   └── 03-writing-and-integrity/
 └── projects/               # Later — not started yet
 ```
 
@@ -256,7 +258,7 @@ databases-relational/
 
 - [x] 0 — Setup & mental model
 - [x] 1 — SQL fundamentals
-- [ ] 2 — Joins & set thinking
+- [x] 2 — Joins & set thinking
 - [ ] 3 — Writing data & integrity
 - [ ] 4 — Schema design & normalization
 - [ ] 5 — PostgreSQL types
