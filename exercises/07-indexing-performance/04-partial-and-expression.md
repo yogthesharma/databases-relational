@@ -12,7 +12,13 @@ Read: `notes/07-indexing-performance/04-partial-and-expression.md`
 
 ## Stretch
 
-Write a partial **unique** index idea for “unique email among active users” (`is_active = TRUE`).
+Partial index for inactive users (reactivation queue) — not a second unique on `email` (that’s already `UNIQUE` globally):
+
+```sql
+CREATE INDEX users_inactive_idx
+  ON perf_lab.users (id)
+  WHERE NOT is_active;
+```
 
 ---
 
@@ -39,7 +45,9 @@ CREATE INDEX users_email_lower_idx ON perf_lab.users (LOWER(email));
 Stretch:
 
 ```sql
-CREATE UNIQUE INDEX users_email_active_uidx
-  ON perf_lab.users (email)
-  WHERE is_active;
+CREATE INDEX users_inactive_idx
+  ON perf_lab.users (id)
+  WHERE NOT is_active;
 ```
+
+(`email` is already `UNIQUE` for every row here — a partial unique on active emails would be redundant.)

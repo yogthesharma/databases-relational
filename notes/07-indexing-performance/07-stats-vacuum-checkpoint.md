@@ -41,7 +41,7 @@ CREATE INDEX orders_user_created_idx
   ON perf_lab.orders (user_id, created_at DESC);
 ```
 
-3. Re-run the same `EXPLAIN (ANALYZE, BUFFERS)`. Expect index usage and lower actual time.
+3. Re-run the same `EXPLAIN (ANALYZE, BUFFERS)`. Expect `orders_user_created_idx` in the plan and much lower actual time (a tiny Sort is fine).
 
 ## Node angle
 

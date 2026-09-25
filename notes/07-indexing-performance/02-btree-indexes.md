@@ -15,6 +15,8 @@ WHERE status = 'cancelled';
 
 You should see an **Index Scan** or **Bitmap** path instead of a pure seq scan (for selective enough filters).
 
+In this seed each `status` is ~25% of rows — the planner often picks a **Bitmap Index Scan**. That’s still “using the index”; wall-clock wins are bigger on selective filters like `user_id = 100` (checkpoint).
+
 ## When indexes help
 
 - High selectivity (few rows match)  

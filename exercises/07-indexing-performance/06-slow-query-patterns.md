@@ -35,7 +35,14 @@ WHERE created_at >= TIMESTAMPTZ '2024-06-01'
 ```
 
 3. Postgres still walks/skips many rows — cost grows with page depth.
-4. Example indexes: `users(country)`, `orders(status, user_id)` or `(user_id, status)` — then `EXPLAIN (ANALYZE, BUFFERS)` the join.
+4. Example indexes:
+
+```sql
+CREATE INDEX users_country_idx ON perf_lab.users (country);
+CREATE INDEX orders_status_user_idx ON perf_lab.orders (status, user_id);
+```
+
+Then `EXPLAIN (ANALYZE, BUFFERS)` the join — look for those indexes in the plan (hash/nested loop + bitmap/index).
 5. Extra heap I/O; harder index-only scans; more data over the wire.
 
 Stretch: seek to the last seen `(created_at, id)` and read the next N ordered rows — no giant offset.

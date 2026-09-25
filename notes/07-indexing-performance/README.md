@@ -8,7 +8,7 @@ Same DB `learn`. Practice in schema **`perf_lab`** (~5k users, ~50k orders — e
 docker compose exec -T postgres psql -U postgres -d learn < docker/init/07-module7-perf-lab.sql
 ```
 
-Reset wipes indexes you created. PK indexes remain only after a fresh seed until you add more.
+Reset wipes indexes you created. Fresh seed only has PK / UNIQUE indexes (`orders_pkey`, `users_pkey`, `users_email_key`) until you add more.
 
 | # | Concept | Notes |
 |---|---------|-------|

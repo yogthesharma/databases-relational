@@ -45,5 +45,6 @@ FROM generate_series(1, 50000) AS g;
 ANALYZE perf_lab.users;
 ANALYZE perf_lab.orders;
 
--- Intentionally NO secondary indexes on orders yet (except PK / FK none).
+-- Intentionally NO secondary indexes on orders.user_id / status / created_at.
+-- Postgres does NOT auto-index FK columns — so user_id filters start as Seq Scans.
 -- Exercises add indexes; reset drops them with the schema.

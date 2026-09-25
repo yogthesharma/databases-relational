@@ -32,7 +32,7 @@ Run `ANALYZE perf_lab.orders;` — when would you bother?
 
 1. So row/selectivity estimates are realistic enough to pick seq vs index vs join order.
 2. Reclaims dead tuples and maintains visibility map (and related cleanup) in the background.
-3. Fresh seed: typically **Seq Scan** (or sort on seq) — note actual time.
+3. Fresh seed: **Seq Scan** (often under a Sort + Limit) — note actual time (~ms on 50k rows).
 4.
 
 ```sql
@@ -40,6 +40,6 @@ CREATE INDEX orders_user_created_idx
   ON perf_lab.orders (user_id, created_at DESC);
 ```
 
-5. Plan should use the index (index scan / backward); actual time usually drops vs pure seq+sort on 50k rows.
+5. Plan should reference `orders_user_created_idx` (bitmap or index scan); actual time drops a lot (e.g. ~3ms+ → well under 1ms on a warm cache).
 
 Stretch: after bulk loads or heavy skew changes — when plans look wrong relative to reality.

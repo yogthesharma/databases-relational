@@ -31,7 +31,7 @@ SELECT
 
 2. `EXPLAIN` = estimated plan only; `ANALYZE` **executes** and shows actual time/rows.
 3. **Seq Scan** on `perf_lab.orders` (typical on fresh seed).
-4. **actual time**, **rows** (actual); with `BUFFERS`: shared hit/read.
+4. **actual time**, and the **actual** row counts (vs the estimate). `BUFFERS` adds hit/read.
 5. It runs the delete for real.
 
 Stretch: **estimates** the planner uses to choose a plan (not wall-clock until `ANALYZE`).

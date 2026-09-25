@@ -12,7 +12,7 @@ It is **not** (generally) used for `WHERE b = ?` alone — leftmost prefix rule.
 
 ```sql
 CREATE INDEX orders_user_created_idx
-  ON perf_lab.orders (user_id, created_at);
+  ON perf_lab.orders (user_id, created_at DESC);
 
 EXPLAIN (ANALYZE, BUFFERS)
 SELECT id, total, created_at
@@ -21,6 +21,8 @@ WHERE user_id = 42
 ORDER BY created_at DESC
 LIMIT 10;
 ```
+
+Expect the composite index in the plan (index or bitmap). A short **Sort** can still appear — with ~10 rows per user that’s cheap; the win is not scanning all 50k rows.
 
 ## Covering / index-only (overview)
 

@@ -6,7 +6,7 @@ Reset if the lab is messy.
 
 ## Tasks
 
-1. Create `(user_id, created_at)` on `orders`.
+1. Create `(user_id, created_at DESC)` on `orders`.
 2. Explain this query and confirm index use:
 
 ```sql
@@ -33,10 +33,10 @@ Would `(created_at, user_id)` serve the query in task 2 as well? Why/why not?
 
 ```sql
 CREATE INDEX orders_user_created_idx
-  ON perf_lab.orders (user_id, created_at);
+  ON perf_lab.orders (user_id, created_at DESC);
 ```
 
-2. Expect index scan/backward on `orders_user_created_idx` (or similar).
+2. Expect `orders_user_created_idx` in the plan (bitmap or index scan). A small Sort is OK.
 3. Leftmost prefix — without `user_id`, that composite usually isn’t used for `created_at`-only filters.
 4.
 

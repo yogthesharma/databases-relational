@@ -24,7 +24,7 @@ Does `users.email` already have an index? Why?
 CREATE INDEX orders_status_idx ON perf_lab.orders (status);
 ```
 
-2. Yes — typically **Bitmap Index Scan** / **Index Scan** on `orders_status_idx` (exact node can vary).
+2. Yes — typically **Bitmap Index Scan** on `orders_status_idx` (exact node can vary). Don’t expect a huge time win at ~25% selectivity — “uses index” ≠ always dramatically faster.
 3. Low selectivity / tiny table / `ANALYZE` stats say seq scan is cheaper; or query wraps the column in a function.
 4. `\di perf_lab.*`
 5. `DROP INDEX perf_lab.orders_status_idx;`
