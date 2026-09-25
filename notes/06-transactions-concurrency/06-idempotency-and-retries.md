@@ -10,25 +10,32 @@ Networks flake. Serialization failures and deadlocks ask you to **retry** the wh
 
 **Important:** if the `INSERT` hits `unique_violation` (`23505`), the transaction is **aborted** — `ROLLBACK` and treat the payment as already done. Do **not** run the balance `UPDATE`s after a failed insert in the same txn.
 
-Safer pattern — insert first with `ON CONFLICT DO NOTHING`, move money only if a row was inserted:
+Safer pattern — insert with `ON CONFLICT DO NOTHING`, and only move money if the insert won (CTE so a blind retry can’t debit twice):
 
 ```sql
 BEGIN;
 
-INSERT INTO tx_lab.transfers (from_account_id, to_account_id, amount, idempotency_key)
-SELECT a.id, b.id, 15, 'xfer-002'
-FROM tx_lab.accounts a, tx_lab.accounts b
-WHERE a.name = 'alice' AND b.name = 'bob'
-ON CONFLICT (idempotency_key) DO NOTHING
-RETURNING id;
--- If RETURNING is empty → already processed; ROLLBACK (or COMMIT with no updates).
--- If RETURNING has a row → apply balances:
-
-UPDATE tx_lab.accounts SET balance = balance - 15 WHERE name = 'alice';
-UPDATE tx_lab.accounts SET balance = balance + 15 WHERE name = 'bob';
+WITH ins AS (
+  INSERT INTO tx_lab.transfers (from_account_id, to_account_id, amount, idempotency_key)
+  SELECT a.id, b.id, 15, 'xfer-002'
+  FROM tx_lab.accounts a, tx_lab.accounts b
+  WHERE a.name = 'alice' AND b.name = 'bob'
+  ON CONFLICT (idempotency_key) DO NOTHING
+  RETURNING id
+)
+UPDATE tx_lab.accounts AS acct
+SET balance = acct.balance + deltas.delta
+FROM (VALUES
+  ('alice', -15::numeric),
+  ('bob',    15::numeric)
+) AS deltas(name, delta)
+WHERE acct.name = deltas.name
+  AND EXISTS (SELECT 1 FROM ins);
 
 COMMIT;
 ```
+
+If `ins` is empty (key already used), the `UPDATE` matches zero rows — balances unchanged.
 
 ## What to retry
 

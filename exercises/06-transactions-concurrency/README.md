@@ -9,7 +9,8 @@ docker compose exec -T postgres psql -U postgres -d learn < docker/init/06-modul
 ```
 
 Two-session demos: open two terminals with  
-`docker compose exec postgres psql -U postgres -d learn`.
+`docker compose exec postgres psql -U postgres -d learn`  
+and leave both open (closing rolls back open txns / releases locks).
 
 | # | File |
 |---|------|

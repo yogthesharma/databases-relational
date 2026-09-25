@@ -19,8 +19,8 @@ Name one defense against write skew besides Serializable.
 ## Solutions
 
 1. Dirty: see uncommitted data. Non-repeatable: same row changes between reads due to another commit. Phantom: new rows appear in a re-run range query.
-2. Non-repeatable and phantoms (not dirty reads).
-3. B still sees the old committed balance (e.g. `100`). **Dirty read** prevented.
+2. At **Read Committed**: non-repeatable and phantoms (not dirty reads). At Postgres **Repeatable Read**: phantoms are prevented too (still watch write skew / serialization anomalies).
+3. B still sees the last committed balance (e.g. `100` after reset). **Dirty read** prevented.
 4. A: `BEGIN`; `SELECT` alice; wait. B: `UPDATE` alice and commit. A: `SELECT` alice again → different value under Read Committed.
 5. Two transactions each preserve an invariant alone but together break it.
 

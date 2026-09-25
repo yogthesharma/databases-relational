@@ -8,7 +8,8 @@ Same DB `learn`. Practice in schema **`tx_lab`** (accounts, transfers, products)
 docker compose exec -T postgres psql -U postgres -d learn < docker/init/06-module6-tx-lab.sql
 ```
 
-Some demos need **two `psql` sessions** (two terminals). Label them A and B.
+Some demos need **two `psql` sessions** (two terminals). Label them A and B. Keep both sessions open while the other runs — closing a session rolls back an open transaction and drops its locks.
+
 
 | # | Concept | Notes |
 |---|---------|-------|

@@ -32,7 +32,7 @@ WHERE a.name = 'alice' AND b.name = 'bob';
 COMMIT;
 ```
 
-If the second `UPDATE` fails (e.g. overdraft `CHECK`), **neither** balance change stays after `ROLLBACK`.
+If the second `UPDATE` fails (e.g. overdraft `CHECK`), the transaction is **aborted** — run `ROLLBACK` and **neither** balance change is kept.
 
 ## Consistency ≠ “business always happy”
 
