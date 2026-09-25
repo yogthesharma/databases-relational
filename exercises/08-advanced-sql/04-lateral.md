@@ -33,8 +33,20 @@ JOIN LATERAL (
 ORDER BY e.name;
 ```
 
-3. Swap `JOIN` → `LEFT JOIN`; Asha (no sales) appears with NULL amount.
+3. Swap `JOIN` → `LEFT JOIN`; **Asha** and **Ben** (no sales) appear with NULL amount.
 4. When you need the metric on every detail row anyway, or portable ranking.
 5. Lateral already correlates; `ON TRUE` means “keep the lateral row(s)” without an extra predicate.
 
-Stretch: add `AND s.region = 'West'` inside the lateral subquery.
+Stretch:
+
+```sql
+SELECT e.name, t.amount, t.sold_on
+FROM adv_lab.employees e
+JOIN LATERAL (
+  SELECT s.amount, s.sold_on FROM adv_lab.sales s
+  WHERE s.employee_id = e.id AND s.region = 'West'
+  ORDER BY s.amount DESC
+  LIMIT 1
+) AS t ON TRUE
+ORDER BY e.name;
+```

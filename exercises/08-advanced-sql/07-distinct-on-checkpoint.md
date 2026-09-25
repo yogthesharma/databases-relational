@@ -57,4 +57,18 @@ WITH RECURSIVE under_chen AS (
 SELECT * FROM under_chen ORDER BY name;
 ```
 
-Stretch: `ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY sold_on DESC)` then `WHERE rn = 1`.
+Stretch:
+
+```sql
+WITH ranked AS (
+  SELECT employee_id, sold_on, amount,
+         row_number() OVER (
+           PARTITION BY employee_id ORDER BY sold_on DESC
+         ) AS rn
+  FROM adv_lab.sales
+)
+SELECT employee_id, sold_on, amount
+FROM ranked
+WHERE rn = 1
+ORDER BY employee_id;
+```

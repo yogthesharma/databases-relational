@@ -14,7 +14,7 @@ WITH RECURSIVE name AS (
 SELECT * FROM name;
 ```
 
-Postgres walks until the recursive branch returns no rows (or you hit `max_recursion` / cycle).
+Postgres walks until the recursive branch returns **no new rows**. On cyclic graphs it can recurse until an error unless you guard with a visited path (below).
 
 ## Org chart — everyone under Asha
 

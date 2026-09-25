@@ -49,7 +49,9 @@ FROM adv_lab.sales
 ORDER BY employee_id, sold_on;
 ```
 
-`ROWS` = physical peers; `RANGE` = value-based (ties share). Start with `ROWS` while learning.
+`ROWS` = physical peer offsets; `RANGE` = value peers (ties share).  
+
+**Default frame:** if you write `ORDER BY` inside `OVER` but omit a frame, Postgres uses roughly “from partition start through current peer” (`RANGE … CURRENT ROW`) — so `sum(...) OVER (ORDER BY sold_on)` is already a running total. Spell out `ROWS BETWEEN …` when you want an explicit physical window.
 
 ## Node angle
 

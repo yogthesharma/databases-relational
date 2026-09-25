@@ -46,4 +46,17 @@ WITH RECURSIVE eng AS (
 SELECT count(*) FROM eng;
 ```
 
-Stretch: concatenate `r.path || ' > ' || e.name` (seed path with `'Asha'` in the anchor).
+Stretch:
+
+```sql
+WITH RECURSIVE reports AS (
+  SELECT id, name, manager_id, 0 AS depth, name::text AS path
+  FROM adv_lab.employees WHERE name = 'Asha'
+  UNION ALL
+  SELECT e.id, e.name, e.manager_id, r.depth + 1,
+         r.path || ' > ' || e.name
+  FROM adv_lab.employees e
+  JOIN reports r ON e.manager_id = r.id
+)
+SELECT name, depth, path FROM reports ORDER BY depth, name;
+```

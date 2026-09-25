@@ -15,9 +15,10 @@ CROSS JOIN LATERAL (
   LIMIT 1
 ) AS t
 ORDER BY e.name;
+-- Inner LATERAL: employees with zero sales (Asha, Ben) are dropped
 ```
 
-Top sale per employee without a window — often plans well with an index on `(employee_id, amount DESC)`.
+Top sale per employee who has sales — often plans well with an index on `(employee_id, amount DESC)`.
 
 ## `LEFT JOIN LATERAL`
 

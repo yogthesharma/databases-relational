@@ -63,4 +63,17 @@ FROM adv_lab.sales
 ORDER BY sold_on;
 ```
 
-Stretch: same CTE with `PARTITION BY region` and `WHERE rn <= 2`.
+Stretch:
+
+```sql
+WITH ranked AS (
+  SELECT s.*, row_number() OVER (
+    PARTITION BY region ORDER BY amount DESC
+  ) AS rn
+  FROM adv_lab.sales s
+)
+SELECT region, employee_id, amount, sold_on
+FROM ranked
+WHERE rn <= 2
+ORDER BY region, rn;
+```
