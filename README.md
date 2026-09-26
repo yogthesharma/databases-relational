@@ -267,7 +267,13 @@ databases-relational/
 │   └── 12-sql-to-apps/
 ├── apps/
 │   └── m12-transfer/       # Module 12 checkpoint (Node + pg)
-└── projects/               # Later — not started yet
+├── interview-questions/    # 100 interviewer prompts (no answers)
+│   ├── 01-sql-and-indexing/          # 001–025
+│   ├── 02-concurrency-and-transactions/  # 026–045
+│   ├── 03-server-side-and-architecture/  # 046–065
+│   ├── 04-scaling-and-operations/        # 066–085
+│   └── 05-system-design-scenarios/       # 086–100
+└── projects/               # Optional mini-projects (not required to finish modules)
 ```
 
 ---
@@ -294,7 +300,8 @@ databases-relational/
 
 - [x] Core concepts noted under `notes/`
 - [x] Exercises completed under `exercises/`
-- [ ] At least two mini-projects shipped under `projects/`
+- [x] Interview question bank under `interview-questions/` (100 prompts)
+- [ ] At least two mini-projects shipped under `projects/` (optional)
 - [x] Can explain ACID, isolation, indexes, and `EXPLAIN` without looking anything up
 - [x] Comfortable day-to-day in `psql` + one GUI
 
