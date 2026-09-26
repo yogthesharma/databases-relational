@@ -248,7 +248,9 @@ databases-relational/
 │   ├── 07-indexing-performance/
 │   ├── 08-advanced-sql/
 │   ├── 09-postgres-features/
-│   └── 10-security-roles/
+│   ├── 10-security-roles/
+│   ├── 11-operations-lite/
+│   └── 12-sql-to-apps/
 ├── exercises/              # Same module/concept filenames as notes/
 │   ├── 00-setup/
 │   ├── 01-sql-fundamentals/
@@ -260,7 +262,11 @@ databases-relational/
 │   ├── 07-indexing-performance/
 │   ├── 08-advanced-sql/
 │   ├── 09-postgres-features/
-│   └── 10-security-roles/
+│   ├── 10-security-roles/
+│   ├── 11-operations-lite/
+│   └── 12-sql-to-apps/
+├── apps/
+│   └── m12-transfer/       # Module 12 checkpoint (Node + pg)
 └── projects/               # Later — not started yet
 ```
 
@@ -280,17 +286,17 @@ databases-relational/
 - [x] 7 — Indexing & performance
 - [x] 8 — Advanced SQL
 - [x] 9 — Postgres product features
-- [ ] 10 — Security & roles
-- [ ] 11 — Operations lite
-- [ ] 12 — SQL in applications
+- [x] 10 — Security & roles
+- [x] 11 — Operations lite
+- [x] 12 — SQL in applications
 
 ### Repo outcomes
 
-- [ ] Core concepts noted under `notes/`
-- [ ] Exercises completed under `exercises/`
+- [x] Core concepts noted under `notes/`
+- [x] Exercises completed under `exercises/`
 - [ ] At least two mini-projects shipped under `projects/`
-- [ ] Can explain ACID, isolation, indexes, and `EXPLAIN` without looking anything up
-- [ ] Comfortable day-to-day in `psql` + one GUI
+- [x] Can explain ACID, isolation, indexes, and `EXPLAIN` without looking anything up
+- [x] Comfortable day-to-day in `psql` + one GUI
 
 ---
 

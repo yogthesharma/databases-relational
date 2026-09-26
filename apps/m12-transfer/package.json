@@ -1,0 +1,13 @@
+{
+  "name": "m12-transfer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Module 12 checkpoint — parameterized transactional transfer",
+  "scripts": {
+    "transfer": "node transfer.js"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}
