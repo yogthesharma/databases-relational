@@ -20,7 +20,7 @@ Read: `notes/04-schema-design/05-naming-and-schemas.md`
 
 1. `student_email`, `course_credits`, `instructor_dept` (or on normalized tables: `email`, `credits`, `dept`).
 2. `user` is a reserved role/keyword; unquoted `user` is painful.
-3. Typically `public` (shared course tables), `write_lab` (M3), `design_lab` (M4), `types_lab` (M5), `tx_lab` (M6), `perf_lab` (M7), `adv_lab` (M8), `feat_lab` (M9) — plus system schemas.
+3. Typically `public` (shared course tables), `write_lab` (M3), `design_lab` (M4), `types_lab` (M5), `tx_lab` (M6), `perf_lab` (M7), `adv_lab` (M8), `feat_lab` (M9), `sec_lab` (M10) — plus system schemas.
 4. `SELECT * FROM design_lab.raw_enrollments;`
 5. New **schema**: same DB, shared roles/backup, namespace split. New **database**: stronger isolation (extra connections, migrations, backups).
 

@@ -247,7 +247,8 @@ databases-relational/
 │   ├── 06-transactions-concurrency/
 │   ├── 07-indexing-performance/
 │   ├── 08-advanced-sql/
-│   └── 09-postgres-features/
+│   ├── 09-postgres-features/
+│   └── 10-security-roles/
 ├── exercises/              # Same module/concept filenames as notes/
 │   ├── 00-setup/
 │   ├── 01-sql-fundamentals/
@@ -258,7 +259,8 @@ databases-relational/
 │   ├── 06-transactions-concurrency/
 │   ├── 07-indexing-performance/
 │   ├── 08-advanced-sql/
-│   └── 09-postgres-features/
+│   ├── 09-postgres-features/
+│   └── 10-security-roles/
 └── projects/               # Later — not started yet
 ```
 
@@ -277,7 +279,7 @@ databases-relational/
 - [x] 6 — Transactions & concurrency
 - [x] 7 — Indexing & performance
 - [x] 8 — Advanced SQL
-- [ ] 9 — Postgres product features
+- [x] 9 — Postgres product features
 - [ ] 10 — Security & roles
 - [ ] 11 — Operations lite
 - [ ] 12 — SQL in applications
