@@ -26,8 +26,13 @@ As `sec_readonly`, prove `DELETE FROM sec_lab.orders` fails.
 SET ROLE sec_app;
 SELECT count(*) FROM sec_lab.customers;
 INSERT INTO sec_lab.orders (customer_id, total, status)
-VALUES (1, 5.00, 'pending') RETURNING id;
-UPDATE sec_lab.orders SET status = 'paid' WHERE customer_id = 1 AND total = 5.00;
+VALUES (1, 5.00, 'pending')
+RETURNING id;
+-- use the returned id, or currval in the SAME session:
+UPDATE sec_lab.orders
+SET status = 'paid'
+WHERE id = currval('sec_lab.orders_id_seq')
+RETURNING id, status;
 RESET ROLE;
 ```
 

@@ -31,4 +31,4 @@ FROM pg_roles WHERE rolname LIKE 'sec_%' ORDER BY 1;
 4. **No** — bypasses protections; huge blast radius.
 5. App (DML), readonly (`SELECT`), migrations (DDL), admin (break-glass).
 
-Stretch: `current_user` becomes `sec_app`; `session_user` stays `postgres`.
+Stretch: `current_user` becomes `sec_app`; `session_user` stays `postgres`. Privilege checks now follow `sec_app` (superuser powers are off until `RESET ROLE`).

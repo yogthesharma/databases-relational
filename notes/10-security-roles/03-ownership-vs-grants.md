@@ -18,7 +18,7 @@ Everyone else needs explicit `GRANT`s (or inherits via role membership).
 |--------|-------|-------------------------|
 | `SELECT`/`INSERT`/… | yes | yes |
 | `DROP TABLE` | yes | **no** |
-| `TRUNCATE` | often owner / special | not granted here |
+| `TRUNCATE` | yes (by default) | **no** — needs separate `TRUNCATE` grant |
 | `ALTER TABLE` | yes | **no** |
 
 ```sql

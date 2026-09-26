@@ -36,8 +36,16 @@ RETURNING id, email;
 RESET ROLE;
 ```
 
-3. `SELECT` works; `INSERT` → permission denied.
+3.
+
+```sql
+SET ROLE sec_readonly;
+SELECT count(*) FROM sec_lab.orders;  -- ok
+INSERT INTO sec_lab.orders (customer_id, total) VALUES (1, 1.00);  -- permission denied
+RESET ROLE;
+```
+
 4. Schema `USAGE` is required to access objects inside the schema.
-5. Nextval for `SERIAL`/`IDENTITY` — without it, inserts fail on the sequence.
+5. `nextval` for `SERIAL`/`IDENTITY` — without sequence `USAGE`/`SELECT`, inserts fail even with table `INSERT`.
 
 Stretch: delete fails after revoke; run the reset SQL to restore grants.

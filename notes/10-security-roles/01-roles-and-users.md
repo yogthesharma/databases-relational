@@ -12,6 +12,8 @@ GRANT reporting TO alice;
 
 Lab uses `NOLOGIN` roles + `SET ROLE` so you don’t bake passwords into seed scripts.
 
+**Important:** when you `SET ROLE sec_app` as superuser `postgres`, privilege checks use **`sec_app`’s** rights (you temporarily lose superuser powers). That’s why `permission denied` demos work. `RESET ROLE` restores `postgres`.
+
 ```sql
 SELECT rolname, rolcanlogin, rolsuper
 FROM pg_roles

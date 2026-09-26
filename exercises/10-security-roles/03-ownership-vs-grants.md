@@ -25,7 +25,7 @@ SELECT tablename, tableowner FROM pg_tables WHERE schemaname = 'sec_lab';
 ```
 
 2. Error — must be owner (or superuser).
-3. Error — `TRUNCATE` not granted (and isn’t plain DELETE).
+3. Error — `permission denied` (`TRUNCATE` is its own privilege; not granted to `sec_app`).
 4. Compromised app credentials could DDL/drop the schema away.
 5. A migration / deployer role owns DDL; app gets DML grants only.
 

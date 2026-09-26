@@ -10,6 +10,8 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA sec_lab TO sec_app;
 
 Without `USAGE` on the schema, table grants don’t help.
 
+`SERIAL` / identity inserts also need **`USAGE` (and typically `SELECT`) on the sequence** — otherwise you get `permission denied for sequence …`.
+
 ## Demo
 
 ```sql

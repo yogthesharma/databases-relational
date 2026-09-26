@@ -20,9 +20,13 @@ INSERT INTO sec_lab.orders (customer_id, total, status)
 VALUES (1, 5.00, 'pending')
 RETURNING id, total;
 
-UPDATE sec_lab.orders SET status = 'paid' WHERE id = currval('sec_lab.orders_id_seq');
+-- Same session only: currval sees the INSERT's nextval
+UPDATE sec_lab.orders
+SET status = 'paid'
+WHERE id = currval('sec_lab.orders_id_seq')
+RETURNING id, status;
 
--- Expect failures:
+-- Expect failures (uncomment one at a time):
 -- DROP TABLE sec_lab.customers;
 -- SELECT count(*) FROM public.employees;
 -- SELECT count(*) FROM feat_lab.articles;
