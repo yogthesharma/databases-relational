@@ -18,7 +18,7 @@ Why update `search_vector` in a trigger instead of only in app code?
 
 ## Solutions
 
-1. `BEFORE INSERT OR UPDATE OF title, body` on `feat_lab.articles`.
+1. `BEFORE INSERT OR UPDATE OF title, body` on `feat_lab.articles` (not every column).
 2.
 
 ```sql

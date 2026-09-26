@@ -2,7 +2,9 @@
 
 ## Lab trigger
 
-On `INSERT`/`UPDATE` of `title`/`body`, the trigger rebuilds `search_vector` and sets `updated_at`.
+On `INSERT` / `UPDATE OF title, body`, the trigger rebuilds `search_vector` and sets `updated_at`.
+
+Updates that touch **only** other columns (e.g. `attrs`) do **not** fire this trigger — so `updated_at` stays put.
 
 ```sql
 UPDATE feat_lab.articles

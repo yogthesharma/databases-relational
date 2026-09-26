@@ -7,7 +7,7 @@ Reset if you mutated data heavily.
 ## Tasks
 
 1. As `feat_reader` with `app.user_key = 'chen'`, which article slugs are visible? Why?
-2. Why might `postgres` see all rows even with RLS enabled?
+2. Why might `postgres` still see every row even with RLS enabled (and even with `FORCE`)?
 3. Write a `NOTIFY` of channel `article_events` with payload `slug=draft-rls`.
 4. One sentence: when is LISTEN/NOTIFY a bad queue substitute?
 5. **Checkpoint (pick one and run it):**
@@ -17,7 +17,7 @@ Reset if you mutated data heavily.
 
 ## Stretch
 
-`ALTER TABLE feat_lab.articles FORCE ROW LEVEL SECURITY;` then select as table owner — what changes? (Reset lab after.)
+Try `ALTER TABLE feat_lab.articles FORCE ROW LEVEL SECURITY;` then `SELECT` as `postgres`. What happens? Why? (Reset lab after.)
 
 ---
 
@@ -34,7 +34,7 @@ RESET ROLE;
 
 Published rows **plus** `draft-rls` (author `chen`).
 
-2. Owners bypass RLS unless `FORCE ROW LEVEL SECURITY`.
+2. **Superusers** always bypass RLS; **table owners** bypass unless `FORCE ROW LEVEL SECURITY`. The lab user `postgres` is a superuser — use `feat_reader` to see policies.
 3. `NOTIFY article_events, 'slug=draft-rls';`
 4. No persistence, limited payload, delivery only to live listeners.
 5. Examples:
@@ -55,4 +55,4 @@ REFRESH MATERIALIZED VIEW feat_lab.tag_stats;
 SELECT * FROM feat_lab.tag_stats ORDER BY article_count DESC;
 ```
 
-Stretch: owner also becomes subject to policies until you drop FORCE / reset lab.
+Stretch: As `postgres` (superuser), `FORCE ROW LEVEL SECURITY` still won’t hide rows — superusers bypass RLS. Policies show up under `SET ROLE feat_reader` (reset lab afterward if you forced RLS).

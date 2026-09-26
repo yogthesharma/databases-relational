@@ -61,8 +61,7 @@ INSERT INTO feat_lab.articles (slug, title, body, attrs, is_published, author_ke
    '{"tags":["security","rls"],"level":"advanced","likes":0}'::jsonb,
    FALSE, 'chen');
 
--- Force search_vector for rows (trigger already fired on INSERT).
--- Published catalog view
+-- Trigger fills search_vector + updated_at on INSERT/UPDATE of title/body.
 CREATE OR REPLACE VIEW feat_lab.published_articles AS
 SELECT id, slug, title, attrs, created_at
 FROM feat_lab.articles

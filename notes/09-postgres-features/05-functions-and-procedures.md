@@ -3,7 +3,9 @@
 ## SQL function (lab)
 
 ```sql
-SELECT feat_lab.article_likes(1);
+SELECT feat_lab.article_likes(id)
+FROM feat_lab.articles
+WHERE slug = 'postgres-jsonb';
 ```
 
 ```sql

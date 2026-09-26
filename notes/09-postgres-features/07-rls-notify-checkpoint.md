@@ -14,7 +14,8 @@ SELECT slug, is_published, author_key FROM feat_lab.articles;
 RESET ROLE;
 ```
 
-Table **owners bypass RLS** unless `ALTER TABLE … FORCE ROW LEVEL SECURITY`. For demos as `postgres`, either `SET ROLE feat_reader` or force RLS.
+Table **owners** bypass RLS unless `ALTER TABLE … FORCE ROW LEVEL SECURITY`.  
+**Superusers** (like the lab’s `postgres` role) **always** bypass RLS — even with `FORCE`. For demos, `SET ROLE feat_reader` (non-superuser).
 
 ## LISTEN / NOTIFY (optional)
 

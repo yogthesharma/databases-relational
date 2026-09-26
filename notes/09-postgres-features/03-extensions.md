@@ -14,7 +14,7 @@ Lab enables:
 | Extension | Why |
 |-----------|-----|
 | `pg_trgm` | Fuzzy / similarity (`%`, `gin_trgm_ops`) |
-| `pgcrypto` | `crypt`, `gen_random_uuid` legacy helpers (uuid also in core now) |
+| `pgcrypto` | Hashing / PGP helpers (prefer app-side password policy; `gen_random_uuid()` is in **core** since PG 13) |
 
 ## Awareness list
 
